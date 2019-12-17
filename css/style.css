@@ -4,6 +4,12 @@
 }
 
 
+@media screen and (max-width: 800px) {
+
+}
+@media screen and (max-width: 479px) {
+    
+  }
 
 .menu_top {
     z-index: 1;
@@ -146,6 +152,7 @@ ol.carousel-indicators li.active {
 
 .collections {
     display: flex;
+    
     height: 900px;
     background-color: black;
     justify-content: center;
@@ -171,6 +178,7 @@ ol.carousel-indicators li.active {
     height: 281px;
     padding-top: 99px;
     justify-content: space-evenly;
+    
 }
 
 .brands_list img {
