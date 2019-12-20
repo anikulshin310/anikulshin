@@ -83,7 +83,7 @@
     font-size: 82px;
     color: white;
     line-height: 60px;
-    height: 100%;
+    
 }
 
 .carousel-content p {
@@ -216,7 +216,7 @@ ol.carousel-indicators li.active {
 
 .collections {
     background-color: #000000;
-    height: 10vh;
+    height: 120px;
 }
 
 .brands {
