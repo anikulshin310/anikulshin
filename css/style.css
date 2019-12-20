@@ -11,9 +11,17 @@
         flex-direction: column;
         margin: 0;
     }
+    .navbar {
+        display: none;
+    }
+   
    
 }
+.row1 {
+    margin-left: -15px;
+    margin-right: -15px;
 
+}
 .menu_top {
     z-index: 1;
     background-color: #0e0e0e;
@@ -38,7 +46,7 @@
 }
 
 .menu_icons {
-    width: 80vw;
+    width: 20vw;
     margin-right: 8vw;
     margin-left: 8vw;
     display: flex;
@@ -96,23 +104,23 @@
     border-radius: 0px;
 }
 
-/* .carousel-item  {
+ /* .carousel-item  {
     height: 100vh;
     background: no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}   */
+}   
 
-/* .carousel-item :active {
+.carousel-item :active {
     width: 100%;
     background: no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-} */
+}  */
 
 #logo_text {
     display: inline-block;
@@ -227,9 +235,8 @@ ol.carousel-indicators li.active {
 
 .customers {
     background-color: black;
-   
+ 
 }
-
 
 
 .customer_text {
@@ -250,9 +257,11 @@ ol.carousel-indicators li.active {
      margin-left: 8vw;
     padding-right: 8vw;
     
+    
 }
 .slider_container {
     display: flex;
+    
     
     
     
@@ -281,4 +290,19 @@ ol.carousel-indicators li.active {
 
 .customer_slide img {
     width: 120px;
+}
+
+#customer_indicators {
+    display: flex;
+    position: relative;
+    width: auto;
+    justify-content: space-between;
+    width: 10%;
+    
+    margin-bottom: 10px;
+}
+.cust {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
 }
