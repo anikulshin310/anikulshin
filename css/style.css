@@ -3,7 +3,7 @@
     src: url(../fonts/PTSans-Italic.ttf);
 }
 
-@media screen and (min-width:320px) and (max-width:800px) {
+@media screen and (min-width:320px) and (max-width:900px) {
     ol.carousel-indicators {
         visibility: hidden;
     }
@@ -22,6 +22,9 @@
     .menu_icons {
         width: 100vw !important;
 
+    }
+    .carousel-content {
+        margin-top: 8vw;
     }
    
    
@@ -73,7 +76,7 @@
 
 .carousel-content {
     position: absolute;
-    margin-top: 30vh;
+    margin-top: 10vw;
     margin-left: 8vw;
     z-index: 1;
     font-family: "Bebas Neue";
@@ -138,8 +141,8 @@
     position: absolute;
     padding: 0;
     z-index: 1;
-    width: 8vw;
-    margin-top: 2vh;
+    
+    margin-top: -3vw;
     font-family: "Bebas Neue";
     width: 100%;
 }
@@ -207,12 +210,13 @@ ol.carousel-indicators li.active {
     color: white;
     font-family: "Bebas Neue";
     font-size: 48px;
-    padding-top: 90px;
+    
     padding-left: 0;
 }
 
 .collections {
     background-color: #000000;
+    height: 10vh;
 }
 
 .brands {
