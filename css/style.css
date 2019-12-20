@@ -3,7 +3,7 @@
     src: url(../fonts/PTSans-Italic.ttf);
 }
 
-@media screen and (max-width:599) {
+@media screen and (min-width:599) {
     ol.carousel-indicators {
         visibility: hidden;
     }
