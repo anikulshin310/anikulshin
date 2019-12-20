@@ -14,6 +14,15 @@
     .navbar {
         display: none;
     }
+    .menu_top_menu{
+    
+        justify-content: space-around !important;
+        
+    }
+    .menu_icons {
+        width: 100vw !important;
+
+    }
    
    
 }
@@ -41,8 +50,8 @@
 }
 
 .menu_top_menu {
-    padding: 0;
-    justify-content: flex-end;
+   
+    justify-content: flex-end; 
 }
 
 .menu_icons {
@@ -104,23 +113,7 @@
     border-radius: 0px;
 }
 
- /* .carousel-item  {
-    height: 100vh;
-    background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}   
 
-.carousel-item :active {
-    width: 100%;
-    background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}  */
 
 #logo_text {
     display: inline-block;
