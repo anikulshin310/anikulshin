@@ -62,6 +62,7 @@
 .menu_top_menu {
 
     justify-content: flex-end;
+    margin-left: 15px;
 }
 
 .menu_icons {
@@ -383,7 +384,7 @@ ol.carousel-indicators li.active {
 .footer {
     display: flex;
     justify-content: space-between;
-    height: 463px;
+    
     background-color: #0e0e0e;
     padding-left: 8vw;
     margin-left: -15px;
