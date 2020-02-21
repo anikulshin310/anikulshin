@@ -1,146 +1,132 @@
-;(function(global){
-    let AddressBook = function(name,phone,email){
-      return new AddressBook.init(name,phone,email);
-    };
-    
-    AddressBook.prototype = {
-      //default functions
-      data:[
-        //add data here
-      ],
-      searchResults:[
+const form = document.querySelector('form');
+const trHead = document.querySelector('#head');
+const conData = document.querySelector('#data');
+const nameInput = document.querySelector('#name');
+const addInput = document.querySelector('#add');
+const telInput = document.querySelector('#tel');
+const emailInput = document.querySelector('#email');
+const urlInput = document.querySelector('#url');
+const button = document.querySelector('button');
+
+let db
+
+window.onload = () => {
+    let request = window.indexedDB.open('contacts', 1)
+
+    request.onerror = () => {
         
-      ],
-      addNewContact:function(name,phone,email){
-        this.data.push({
-          name: name,
-          phone: phone,
-          email:email
-        });
-        return this;
-      },
-      save:function(){
-        //save to local storage. This isn't hugely necessary
-        
-      },
-      returnAll:function(){
-        return this.data;
-      },
-      displayData:function(){
-        this.log(this.data);
-        return this;
-      },
-      log:function(data){
-        console.log(data);
-        return this;
-      },
-      search:function(searchTerm){
-        if(this.data.length){
-          for(let i=0;i<this.data.length;i++){
-            if(this.data[i].name.toLowerCase() == searchTerm.toLowerCase()){
-              console.error(this.data[i]);
-              this.searchResults.push(this.data[i]);
-            }
-          }
-          
-          return this.searchResults;
-        }else{
-          console.log("There are no results");
-        }
-        return this;
-      },
-      lastResults:function(){
-        return this.searchResults;
-      }
-    } 
-    
-    AddressBook.init=function(name,phone,email){
-      let self = this;
-      //set up the address book
-      if(name || phone || email){
-        self.addNewContact(name || "", phone||"", email||"");
-      }
-      
     }
+
+    request.onsuccess = () => {
+        
+        db = request.result;
+        displayData();
+    }
+    request.onupgradeneeded = (e) => {
+        let db = e.target.result;
+        let objectStore = db.createObjectStore('contacts', { keyPath: 'id', autoIncrement:true });
     
-    AddressBook.init.prototype = AddressBook.prototype;
-   
-   global.AddressBook = $ab = AddressBook;
- })(window);
- 
- if(!window.contactList){ //check if we already have a contact list
-    window.contactList=$ab();
-   }
- 
- let form  = document.getElementById('contact');
- form.addEventListener('submit', function(){
-    if(!window.contactList){ //check if we already have a contact list
-    window.contactList=$ab(form.person.value,form.phone.value,form.email.value);
-   } else {
-   //saves new values rather than deleting old ones as well
-     contactList.addNewContact(form.person.value,form.phone.value,form.email.value);
-   }
-   
-     form.person.value = '';
-     form.phone.value = '';
-     form.email.value = '';
-   
-    event.preventDefault();
- });
- 
- let searchForm = document.getElementById('search');
- searchForm.addEventListener('submit', function(){
-   let results;
-   if(results !== undefined){
-     results = null;
-   }
-   if(!window.contactList){
-     window.contactList = $ab();
-   }else{
-     results = contactList.search(searchForm.search.value);
-   }
-   document.getElementById('results').innerHTML = '';
-   if(results.length>0){
-     
-     for(let i = 0;i<results.length;i++){
-       document.getElementById('results').innerHTML += '<div class="contact-item">Name:'+results[i].name+'<br>Phone:'+results[i].phone+'<br>Email:'+results[i].email+'</div><hr>';
-     }
-   } else{
-    document.getElementById('results').innerHTML += '<div class="contact-item">There are no results for this name</div><hr>';
-   }
-   
-   //do something with the results
-   event.preventDefault();
- });
- 
- document.getElementById('js-show-all').addEventListener('click', function(){
-   if(window.contactList){ //check if we already have a contact list
-      document.getElementById('show-panel').innerHTML = '';
-    let contacts = contactList.returnAll();
-     console.log(contacts);
-     if(contacts.length>0){
-       for(let i = 0;i<contacts.length;i++){
-       document.getElementById('show-panel').innerHTML += '<div class="contact-item">Name:'+contacts[i].name+'<br>Phone:'+contacts[i].phone+'<br>Email:'+contacts[i].email+'</div><hr>';
-       }
-     }else{
-       document.getElementById('show-panel').innerHTML += '<div class="contact-item">You have no contacts. Why not add  a few?</div><hr>';
-     }
-   }
-   document.getElementById('show-panel').style.display = 'block';
-   
-   document.getElementById('search-panel').style.display = 'none';
-   document.getElementById('contact-panel').style.display = 'none';
- });
- 
- document.getElementById('js-search').addEventListener('click', function(){
-   document.getElementById('show-panel').style.display = 'none';
-   document.getElementById('search-panel').style.display = 'block';
-   document.getElementById('contact-panel').style.display = 'none';
- });
- 
- document.getElementById('js-add-new').addEventListener('click', function(){
-   document.getElementById('show-panel').style.display = 'none';
-   document.getElementById('search-panel').style.display = 'none';
-   document.getElementById('contact-panel').style.display = 'block';
- });
- 
+        objectStore.createIndex('name', 'name', { unique: false });
+        objectStore.createIndex('address', 'address', { unique: false });
+        objectStore.createIndex('telephone', 'telephone', { unique: false });
+        objectStore.createIndex('email', 'email', { unique: false });
+        objectStore.createIndex('url', 'url', { unique: false });
+    
+       
+      };
+
+    form.onsubmit = (e) => {
+        e.preventDefault()
+        let newItem = { name: nameInput.value, address: addInput.value, telephone: telInput.value, email: emailInput.value, url: urlInput.value };
+        let transaction = db.transaction(['contacts'], 'readwrite');
+        let objectStore = transaction.objectStore('contacts');
+        var request = objectStore.add(newItem)
+
+        request.onsuccess = () => {
+            nameInput.value = '';
+            addInput.value = '';
+            telInput.value = '';
+            emailInput.value = '';
+            urlInput.value = '';
+        };
+
+        transaction.oncomplete = () => {
+            
+            displayData();
+        };
+
+        transaction.onerror = () => {
+            
+        };
+    }
+
+    function displayData() {
+        while (conData.firstChild) {
+          conData.removeChild(conData.firstChild);
+        }
+
+        let objectStore = db.transaction('contacts').objectStore('contacts');
+
+        objectStore.openCursor().onsuccess = (e) => {
+          let cursor = e.target.result;
+
+          if(cursor) {
+            let tr = document.createElement('tr');
+            let tdName = document.createElement('td'); 
+            let tdAdd = document.createElement('td');
+            let tdTel = document.createElement('td');
+            let tdEmail = document.createElement('td');
+            let tdUrl = document.createElement('td');
+
+            tr.appendChild(tdName);
+            tr.appendChild(tdAdd);
+            tr.appendChild(tdTel);
+            tr.appendChild(tdEmail);
+            tr.appendChild(tdUrl);
+            conData.appendChild(tr);
+    
+            tdName.textContent = cursor.value.name
+            tdAdd.textContent = cursor.value.address
+            tdTel.textContent = cursor.value.telephone
+            tdEmail.textContent = cursor.value.email
+            tdUrl.textContent = cursor.value.url
+    
+            tr.setAttribute('data-contact-id', cursor.value.id);
+    
+            let deleteBtn = document.createElement('button');
+            tr.appendChild(deleteBtn);
+            deleteBtn.textContent = 'Delete';
+    
+            deleteBtn.onclick = deleteItem;
+
+            cursor.continue();
+          } 
+          else {
+            if(!conData.firstChild) {
+              let para = document.createElement('p');
+              para.textContent = 'Здесь пока ничего нет.'
+              conData.appendChild(para);
+            }
+            
+          }
+        };
+      }
+
+      function deleteItem(e) {
+        let contactId = Number(e.target.parentNode.getAttribute('data-contact-id'));
+        let transaction = db.transaction(['contacts'], 'readwrite');
+        let objectStore = transaction.objectStore('contacts');
+        let request = objectStore.delete(contactId);
+    
+        transaction.oncomplete = () => {
+          e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+          
+
+          if(!conData.firstChild) {
+            let para = document.createElement('p');
+            para.textContent = 'Здесь пока нет записей.';
+            conData.appendChild(para);
+          }
+        };
+      }
+}
