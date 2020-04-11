@@ -1,62 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <title>Контакты</title>
+
 </head>
+
 <body>
-    
-    <main>
-        <section id="contact-display">
-            <h2 class="contacts">Контакты</h2>
-            <table>
-                <tr id="head">
-                    <thead>
-                        <th>Имя</th>
-                        <th>Адрес</th>
-                        <th>Телефон</th>
-                        <th>Email</th>
-                        <th>ВК</th>
-                    </thead>
-                </tr>
-                <tbody id="data">
-                    
-                </tbody>
-            </table>
-        </section>
-        <section id="new-contact">
-            <h2>Создать контакт</h2>
-            <form>
-                <div>
-                    <label for="name">Имя:</label>
-                    <input id="name" type="text"  maxlength="15" required>
-                </div>
-                <div>
-                    <label for="add">Адрес:</label>
-                    <input id="add" type="text" maxlength="30" required>
-                </div>
-                <div>
-                    <label for="tel">Телефон:</label>
-                    <input id="tel" type="tel" maxlength="15" required>
-                </div>
-                <div>
-                    <label for="email">Email:</label>
-                    <input id="email" type="email" maxlength="30" required>
-                </div>
-                <div>
-                    <label for="url">ВК:</label>
-                    <input id="url" type="url" maxlength="20">
-                </div>
-                <div>
-                    <button>Создать контакт</button>
-                </div>
-            </form>
-        </section>
-    </main>
-    
+    <div class="modalWrapper" id = "modalWrapper">
+        <div class="modal">
+            
+            <input type="button" id="add1" value="Start Game" onclick="startGame()">
+        </div>
+    </div>
+
+    <div id="coords1"></div>
+
+    <div id="wrapper" class="wrapper">
+        <canvas id="field" width="660" height="660"></canvas>
+
+
+    </div>
     <script src="script.js"></script>
+
 </body>
+
 </html>
